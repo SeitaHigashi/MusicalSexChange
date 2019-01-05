@@ -3,6 +3,6 @@
 
 int main(){
     wav_read("ADAMAS.wav");
-    getSamplingLate();
+    wav_write("Test.wav");
     return 0;
 }

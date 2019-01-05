@@ -1,9 +1,7 @@
 #include "Conversion.h"
 
-short getSamplingLate(){
-    return wav.samplingLate;
+unsigned short getSamplingLate(){
 }
 
-short setSamplingLate(short late){
-    wav.samplingLate = late;
+unsigned short setSamplingLate(unsigned short late){
 }

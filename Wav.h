@@ -1,11 +1,5 @@
 #pragma once
 
-
-typedef struct {
-    unsigned short size;
-    unsigned char* expansion;
-} WAVE_EXPANSIONS;
-
 typedef struct {
     short left;
     short right;
@@ -15,10 +9,13 @@ typedef struct {
     short wave;
 } MONAURAL_WAVE;
 
+typedef struct{
+    unsigned char LIST_CHUNK[4];
+    unsigned int size;
+    unsigned char* data;
+} LIST;
+
 typedef struct {
-    unsigned char RIFF_HEAD[4];
-    unsigned int fileSize;
-    unsigned char WAVE_HEAD[4];
     unsigned char defineFormat[4];
     unsigned int fmtSize;
     unsigned short formatID;
@@ -27,12 +24,29 @@ typedef struct {
     unsigned int dataSpeed;
     unsigned short blockSize;
     unsigned short bps; //bit per sample
+} FMT;
+
+typedef struct {
     unsigned char DATA_CHUNK[4];
     unsigned int waveSize;
-    WAVE_EXPANSIONS expansions;
     void* wave;
-} WAVE_HEAD;
+} DATA;
 
-WAVE_HEAD wav;
+typedef struct {
+    unsigned char WAVE_HEAD[4];
+    FMT fmt;
+    LIST list;
+    DATA data;
+} WAVE;
 
-WAVE_HEAD wav_read(char*);
+typedef struct {
+    unsigned char RIFF_HEAD[4];
+    unsigned int fileSize;
+    WAVE wave;
+} RIFF;
+
+RIFF wav;
+
+void wav_read(char*);
+
+void wav_write(char*);

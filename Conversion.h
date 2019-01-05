@@ -2,6 +2,6 @@
 
 #include "Wav.h"
 
-short getSamplingLate();
+unsigned short getSamplingLate();
 
-short setSamplingLate(short);
+unsigned short setSamplingLate(unsigned short);
