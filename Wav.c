@@ -83,6 +83,7 @@ void wav_read(char* path){
 
 
     puts("wav read successful");
+    fclose(fp);
 }
 
 void wav_write(char* path){
@@ -93,4 +94,14 @@ void wav_write(char* path){
         exit(1);
     }
 
+    fwrite(&wav, sizeof(int), 2, fp);
+
+    fwrite(&wav.wave, sizeof(int), 1, fp);
+
+    fwrite(&wav.wave.fmt, sizeof(FMT), 1, fp);
+
+    fwrite(&wav.wave.data, sizeof(int), 2, fp);
+    fwrite(wav.wave.data.wave, wav.wave.data.waveSize, 1, fp);
+
+    fclose(fp);
 }
