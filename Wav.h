@@ -1,5 +1,6 @@
 #pragma once
 
+
 typedef struct {
     unsigned short size;
     unsigned char* expansion;
