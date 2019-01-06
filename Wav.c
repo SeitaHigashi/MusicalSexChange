@@ -11,8 +11,9 @@ int tag_comparison(char* a, char* b){
     return *(int*)a == *(int*)b;
 }
 
-void wav_read(char* path){
+RIFF wav_read(char* path){
     FILE* fp;
+    RIFF wav;
     char buff[4];
 
     if((fp = fopen(path,"rb")) == NULL){
@@ -84,9 +85,10 @@ void wav_read(char* path){
 
     puts("wav read successful");
     fclose(fp);
+    return wav;
 }
 
-void wav_write(char* path){
+void wav_write(char* path, RIFF wav){
     FILE* fp;
 
     if((fp = fopen(path,"wb")) == NULL){

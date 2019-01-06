@@ -20,7 +20,7 @@ typedef struct {
     unsigned int fmtSize;
     unsigned short formatID;
     unsigned short channelSize;
-    unsigned int samplingLate;
+    unsigned int samplingRate;
     unsigned int dataSpeed;
     unsigned short blockSize;
     unsigned short bps; //bit per sample
@@ -45,8 +45,6 @@ typedef struct {
     WAVE wave;
 } RIFF;
 
-RIFF wav;
+RIFF wav_read(char*);
 
-void wav_read(char*);
-
-void wav_write(char*);
+void wav_write(char*, RIFF);
