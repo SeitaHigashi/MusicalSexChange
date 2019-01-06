@@ -37,6 +37,7 @@ RIFF wav_read(char* path){
                 fread(&(wav.wave.fmt.fmtSize), sizeof(FMT) - 4, 1, fp);
 
                 fread(buff, sizeof(char), 4, fp);
+
                 if(tag_comparison(buff, "LIST")){
                     tag_copy(buff, wav.wave.list.LIST_CHUNK);
 
@@ -44,9 +45,10 @@ RIFF wav_read(char* path){
 
                     wav.wave.list.data = (unsigned char *)calloc(wav.wave.list.size, sizeof(char));
                     fread(wav.wave.list.data, wav.wave.list.size, 1, fp);
+
+                    fread(buff, sizeof(char), 4, fp);
                 }
 
-                fread(buff, sizeof(char), 4, fp);
                 if (tag_comparison(buff, "data"))
                 {
                     tag_copy(buff, wav.wave.data.DATA_CHUNK);

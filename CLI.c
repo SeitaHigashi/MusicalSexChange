@@ -18,10 +18,10 @@ int main(int argc, char* argv[]){
     };
 
     char* filepath[2]; // [0] = inputfile, [1] = outputfile
-    unsigned short samplingRate = -1;
+    unsigned int samplingRate = 0;
     unsigned short view = -1;
-    unsigned int begin = -1;
-    unsigned int end = -1;
+    unsigned int begin = 0;
+    unsigned int end = __UINT32_MAX__;
 
     opterr = 0;
 
@@ -59,9 +59,13 @@ int main(int argc, char* argv[]){
         return 0;
     }
 
+    if(samplingRate != 0){
+        setSamplingRate(samplingRate, &wav);
+    }
+
+    setBeginTime(begin, &wav);
+
     wav_write(filepath[1], wav);
-
-
     
     return 0;
 }
