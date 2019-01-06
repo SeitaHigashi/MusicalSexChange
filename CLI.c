@@ -35,7 +35,7 @@ int main(int argc, char* argv[]){
                 begin = atoi(optarg);
                 break;
             case 'e':
-                begin = atoi(optarg);
+                end = atoi(optarg);
                 break;
             case 'i':
                 interactive();
@@ -59,11 +59,13 @@ int main(int argc, char* argv[]){
         return 0;
     }
 
-    if(samplingRate != 0){
+    if(samplingRate != 0)
         setSamplingRate(samplingRate, &wav);
-    }
 
     setBeginTime(begin, &wav);
+
+    if(end != __UINT32_MAX__)
+        setEndTime(end - begin, &wav);
 
     wav_write(filepath[1], wav);
     
