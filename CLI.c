@@ -6,7 +6,7 @@
 
 int main(int argc, char* argv[]){
     int i, opt;
-    RIFF wav;
+    RIFF* wav;
     int longindex;
     struct option longopts[] = {
         { "samplingrate",   required_argument,  NULL,   's'},
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]){
 
     for(i = 0; i + optind < argc; i++)filepath[i] = argv[i+optind];
 
-    wav = wav_read(filepath[0]);
+    if((wav = wav_read(filepath[0])) == NULL)exit(1);
 
     if(view == 1){
         viewInformation(wav);
@@ -60,28 +60,25 @@ int main(int argc, char* argv[]){
     }
 
     if(samplingRate != 0)
-        setSamplingRate(samplingRate, &wav);
+        setSamplingRate(samplingRate, wav);
 
-    setBeginTime(begin, &wav);
+    setBeginTime(begin, wav);
 
     if(end != __UINT32_MAX__)
-        setEndTime(end - begin, &wav);
+        setEndTime(end - begin, wav);
 
     wav_write(filepath[1], wav);
     
     return 0;
 }
 
- void interactive(){
-     return;
- }
 
- void viewInformation(RIFF wav){
-     printf("formatID:      %u\n",wav.wave.fmt.formatID);
-     printf("channelSize:   %u\n",wav.wave.fmt.channelSize);
-     printf("samplingRate:  %u\n",wav.wave.fmt.samplingRate);
-     printf("dataSpeed:     %u\n",wav.wave.fmt.dataSpeed);
-     printf("blockSize:     %u\n",wav.wave.fmt.blockSize);
-     printf("bit/sample:    %u\n",wav.wave.fmt.bps);
-     printf("waveSize:    %u\n",wav.wave.data.waveSize);
+ void viewInformation(RIFF* wav){
+     printf("formatID:      %u\n",wav->wave.fmt.formatID);
+     printf("channelSize:   %u\n",wav->wave.fmt.channelSize);
+     printf("samplingRate:  %u\n",wav->wave.fmt.samplingRate);
+     printf("dataSpeed:     %u\n",wav->wave.fmt.dataSpeed);
+     printf("blockSize:     %u\n",wav->wave.fmt.blockSize);
+     printf("bit/sample:    %u\n",wav->wave.fmt.bps);
+     printf("waveSize:    %u\n",wav->wave.data.waveSize);
  }

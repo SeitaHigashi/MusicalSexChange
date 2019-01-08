@@ -45,6 +45,6 @@ typedef struct {
     WAVE wave;
 } RIFF;
 
-RIFF wav_read(char*);
+RIFF* wav_read(char*);
 
-void wav_write(char*, RIFF);
+void wav_write(char*, RIFF*);

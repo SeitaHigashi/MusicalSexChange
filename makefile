@@ -1,4 +1,4 @@
-objs = CLI.o Conversion.o Wav.o
+objs = CLI.o Conversion.o Wav.o Interactive_CLI.o
 
 CLI: $(objs)
 	gcc -o MusicalSexChange $(objs)
@@ -17,6 +17,11 @@ Wav.o: Wav.c
 	gcc -c Wav.c
 
 Wav.o: Wav.h
+
+Interactive_CLI.o: Interactive_CLI.c
+	gcc -c Interactive_CLI.c
+
+Interactive_CLI.o: Interactive_CLI.h
 
 clean:
 	rm -rf $(objs) MusicalSexChange

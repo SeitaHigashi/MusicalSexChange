@@ -2,7 +2,6 @@
 
 #include "Wav.h"
 #include "Conversion.h"
+#include "Interactive_CLI.h"
 
-void interactive();
-
-void viewInformation(RIFF);
+void viewInformation(RIFF*);
